@@ -1,0 +1,32 @@
+{
+  "configurations": [
+    {
+      "showDevDebugOutput": "parsed",
+      "cwd": "${workspaceRoot}",
+      "executable": "./build/beanchmark_CM7.elf",
+      "name": "Debug STM32",
+      "request": "launch",
+      "type": "cortex-debug",
+      "servertype": "openocd",
+      "device": "Core/Startup/startup_stm32h745xx_CM4.s",
+      "configFiles": [
+        "openocd.cfg"
+      ],
+      "svdFile": "STM32F103xx.svd"
+    },
+    {
+      "showDevDebugOutput": "parsed",
+      "cwd": "${workspaceRoot}",
+      "executable": "./build/beanchmark_CM7.elf",
+      "name": "Attach STM32",
+      "request": "attach",
+      "type": "cortex-debug",
+      "servertype": "openocd",
+      "device": "Core/Startup/startup_stm32h745xx_CM4.s",
+      "configFiles": [
+        "openocd.cfg"
+      ],
+      "svdFile": "STM32F103xx.svd"
+    }
+  ]
+}
