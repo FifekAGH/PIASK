@@ -6,33 +6,172 @@
             "hidden": true,
             "generator": "Ninja",
             "binaryDir": "${sourceDir}/build/${presetName}",
-		    "toolchainFile": "${sourceDir}/../gcc-arm-none-eabi.cmake",
+            "toolchainFile": "${sourceDir}/../gcc-arm-none-eabi.cmake",
             "cacheVariables": {
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
             }
         },
         {
-            "name": "Debug",
+            "name": "O0",
             "inherits": "default",
+            "displayName": "Flash: Optimize O0",
+            "description": "Flash benchmark sources with minimal optimization (-O0)",
             "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Debug"
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_CXX_FLAGS_RELEASE": "-O0",
+                "CMAKE_C_FLAGS_RELEASE": "-O0",
+                "USE_RAM_FOR_BENCHMARK": "OFF"
             }
         },
         {
-            "name": "Release",
+            "name": "O1",
             "inherits": "default",
+            "displayName": "Flash: Optimize O1",
+            "description": "Flash benchmark sources with minimal optimization (-O1)",
             "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Release"
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_CXX_FLAGS_RELEASE": "-O1",
+                "CMAKE_C_FLAGS_RELEASE": "-O1",
+                "USE_RAM_FOR_BENCHMARK": "OFF"
+            }
+        },
+        {
+            "name": "O2",
+            "inherits": "default",
+            "displayName": "Flash: Optimize O2",
+            "description": "Flash benchmark sources with standard optimization (-O2)",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_CXX_FLAGS_RELEASE": "-O2",
+                "CMAKE_C_FLAGS_RELEASE": "-O2",
+                "USE_RAM_FOR_BENCHMARK": "OFF"
+            }
+        },
+        {
+            "name": "O3",
+            "inherits": "default",
+            "displayName": "Flash: Optimize O3",
+            "description": "Flash benchmark sources with aggressive optimization (-O3)",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_CXX_FLAGS_RELEASE": "-O3",
+                "CMAKE_C_FLAGS_RELEASE": "-O3",
+                "USE_RAM_FOR_BENCHMARK": "OFF"
+            }
+        },
+        {
+            "name": "Ofast",
+            "inherits": "default",
+            "displayName": "Flash: Optimize Ofast",
+            "description": "Flash benchmark sources with maximum optimization (-Ofast, may break strict standards)",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_CXX_FLAGS_RELEASE": "-Ofast",
+                "CMAKE_C_FLAGS_RELEASE": "-Ofast",
+                "USE_RAM_FOR_BENCHMARK": "OFF"
+            }
+        },
+        {
+            "name": "O0_RAM",
+            "inherits": "default",
+            "displayName": "RAM: Optimize O0",
+            "description": "RAM benchmark sources with minimal optimization (-O0)",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_CXX_FLAGS_RELEASE": "-O0",
+                "CMAKE_C_FLAGS_RELEASE": "-O0",
+                "USE_RAM_FOR_BENCHMARK": "ON"
+            }
+        },
+        {
+            "name": "O1_RAM",
+            "inherits": "default",
+            "displayName": "RAM: Optimize O1",
+            "description": "RAM benchmark sources with minimal optimization (-O1)",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_CXX_FLAGS_RELEASE": "-O1",
+                "CMAKE_C_FLAGS_RELEASE": "-O1",
+                "USE_RAM_FOR_BENCHMARK": "ON"
+            }
+        },
+        {
+            "name": "O2_RAM",
+            "inherits": "default",
+            "displayName": "RAM: Optimize O2",
+            "description": "RAM benchmark sources with standard optimization (-O2)",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_CXX_FLAGS_RELEASE": "-O2",
+                "CMAKE_C_FLAGS_RELEASE": "-O2",
+                "USE_RAM_FOR_BENCHMARK": "ON"
+            }
+        },
+        {
+            "name": "O3_RAM",
+            "inherits": "default",
+            "displayName": "RAM: Optimize O3",
+            "description": "RAM benchmark sources with aggressive optimization (-O3)",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_CXX_FLAGS_RELEASE": "-O3",
+                "CMAKE_C_FLAGS_RELEASE": "-O3",
+                "USE_RAM_FOR_BENCHMARK": "ON"
+            }
+        },
+        {
+            "name": "Ofast_RAM",
+            "inherits": "default",
+            "displayName": "RAM: Optimize Ofast",
+            "description": "RAM benchmark sources with maximum optimization (-Ofast, may break strict standards)",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_CXX_FLAGS_RELEASE": "-Ofast",
+                "CMAKE_C_FLAGS_RELEASE": "-Ofast",
+                "USE_RAM_FOR_BENCHMARK": "ON"
             }
         }
     ],
     "buildPresets": [
         {
-            "name": "Debug",
-            "configurePreset": "Debug"
+            "name": "Flash: O0",
+            "configurePreset": "O0"
         },
         {
-            "name": "Release",
-            "configurePreset": "Release"
+            "name": "Flash: O1",
+            "configurePreset": "O1"
+        },
+        {
+            "name": "Flash: O2",
+            "configurePreset": "O2"
+        },
+        {
+            "name": "Flash: O3",
+            "configurePreset": "O3"
+        },
+        {
+            "name": "Flash: Ofast",
+            "configurePreset": "Ofast"
+        },
+        {
+            "name": "RAM: O0",
+            "configurePreset": "O0_RAM"
+        },
+        {
+            "name": "RAM: O1",
+            "configurePreset": "O1_RAM"
+        },
+        {
+            "name": "RAM: O2",
+            "configurePreset": "O2_RAM"
+        },
+        {
+            "name": "RAM: O3",
+            "configurePreset": "O3_RAM"
+        },
+        {
+            "name": "RAM: Ofast",
+            "configurePreset": "Ofast_RAM"
         }
     ]
 }

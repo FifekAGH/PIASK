@@ -219,7 +219,18 @@ SECTIONS
     . = ALIGN(8);
   } >RAM
 
-  
+  /* Code to execute from ITCMRAM */
+  .itcm_code :
+  {
+    *(.itcmfunc)
+  } >ITCMRAM AT>FLASH
+
+  /* Keep other sections here ... */
+
+  /* Symbols for copying code to ITCM */
+  _sitcm_code = LOADADDR(.itcm_code);
+  _sitcmram = ADDR(.itcm_code);
+  _eitcmram = ADDR(.itcm_code) + SIZEOF(.itcm_code); 
 
   /* Remove information from the standard libraries */
   /DISCARD/ :

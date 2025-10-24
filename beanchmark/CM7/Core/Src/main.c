@@ -18,6 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "fir.h"
 #include "gpio.h"
 #include "qsort.h"
 #include "usart.h"
@@ -79,7 +80,25 @@ void DWT_Init(void) {
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+extern uint32_t _sitcm_code;
+extern uint32_t _sitcmram;
+extern uint32_t _eitcmram;
 
+void CopyITCMCode(void) {
+  uint32_t *src = &_sitcm_code;
+  uint32_t *dst = &_sitcmram;
+
+  while (dst < &_eitcmram) {
+    *dst++ = *src++;
+  }
+}
+
+__attribute__((section(".itcmfunc"))) void CriticalRoutine(void) {
+  // Example: very fast loop or ISR helper
+  for (volatile int i = 0; i < 100; i++) {
+    __NOP();
+  }
+}
 /* USER CODE END 0 */
 
 /**
@@ -89,7 +108,7 @@ void DWT_Init(void) {
 int main(void) {
 
   /* USER CODE BEGIN 1 */
-
+  CopyITCMCode();
   /* USER CODE END 1 */
 /* USER CODE BEGIN Boot_Mode_Sequence_0 */
 #if defined(DUAL_CORE_BOOT_SYNC_SEQUENCE)
@@ -158,17 +177,29 @@ int main(void) {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+
     uint32_t start = DWT->CYCCNT;
-    benchmark();
+    qsort_benchmark();
     uint32_t end = DWT->CYCCNT;
 
     uint32_t cycles = end - start;
     uint8_t msg[100];
-    snprintf((char *)msg, sizeof(msg), "Delay 100ms took %lu cycles\r\n",
-             cycles);
+    snprintf((char *)msg, sizeof(msg), "Qsort took %lu cycles\r\n", cycles);
 
     HAL_UART_Transmit(&huart3, (uint8_t *)msg, strlen((char *)msg),
                       HAL_MAX_DELAY);
+
+    start = DWT->CYCCNT;
+    fir_benchmark();
+    end = DWT->CYCCNT;
+
+    cycles = end - start;
+    snprintf((char *)msg, sizeof(msg), "FIR took %lu cycles\r\n", cycles);
+
+    HAL_UART_Transmit(&huart3, (uint8_t *)msg, strlen((char *)msg),
+                      HAL_MAX_DELAY);
+
+    // CriticalRoutine();
   }
   /* USER CODE END 3 */
 }

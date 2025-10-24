@@ -80,7 +80,7 @@ float arr[20] = {5,  4,   10.3,   1.1, 5.7, 100, 231, 111,   49.5,  99,
 
 int istack[100];
 
-void sort(unsigned long n) {
+__attribute__((section(".itcmfunc"))) void sort(unsigned long n) {
   unsigned long i, ir = n, j, k, l = 1;
   int jstack = 0;
   float a, temp;
@@ -145,11 +145,14 @@ void sort(unsigned long n) {
 
 /* This benchmark does not support verification */
 
-int qsort_verify_benchmark(int res __attribute((unused))) { return -1; }
+__attribute__((section(".itcmfunc"))) int
+qsort_verify_benchmark(int res __attribute((unused))) {
+  return -1;
+}
 
-void qsort_initialise_benchmark(void) {}
+__attribute__((section(".itcmfunc"))) void qsort_initialise_benchmark(void) {}
 
-int qsort_benchmark() {
+__attribute__((section(".itcmfunc"))) int qsort_benchmark() {
   sort(20);
   return 0;
 }
