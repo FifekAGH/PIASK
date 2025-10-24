@@ -75,8 +75,17 @@
 #define M 7
 #define NSTACK 50
 
-float arr[20] = {5,  4,   10.3,   1.1, 5.7, 100, 231, 111,   49.5,  99,
-                 10, 150, 222.22, 101, 77,  44,  35,  20.54, 99.99, 88.88};
+#define INTEGER_REPRESENTATION uint8_t
+#define FLOATING_POINT_REPRESENTATION float
+
+FLOATING_POINT_REPRESENTATION arr[20] = {
+    5,  4,   10.3,   1.1, 5.7, 100, 231, 111,   49.5,  99,
+    10, 150, 222.22, 101, 77,  44,  35,  20.54, 99.99, 88.88};
+
+// INTEGER_REPRESENTATION arr[20] = {5,  4,   10,  1,   5,  100, 231, 111, 49,
+// 99,
+//                                   10, 150, 222, 101, 77, 44,  35,  20,  99,
+//                                   88};
 
 int istack[100];
 

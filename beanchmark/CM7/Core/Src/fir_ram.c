@@ -30,10 +30,12 @@
 
 #define LOOPS 1
 
+#define REPRESENTATION long
+
 /*--------------------------------------------------
  *---- INPUT DATA FOR TESTING
  *--------------------------------------------------*/
-const long fir_int[36] = {
+const REPRESENTATION fir_int[36] = {
     0xfffffffe, 0x1,        0x4,        0x3,        0xfffffffe, 0xfffffffc,
     0x2,        0x7,        0x0,        0xfffffff7, 0xfffffffc, 0xc,
     0xb,        0xfffffff2, 0xffffffe6, 0xf,        0x59,       0x7f,
@@ -41,7 +43,7 @@ const long fir_int[36] = {
     0xfffffffc, 0xfffffff7, 0x0,        0x7,        0x2,        0xfffffffc,
     0xfffffffe, 0x3,        0x4,        0x1,        0xfffffffe, 0};
 
-const long in_data[701] = {
+const REPRESENTATION in_data[701] = {
     0x0,  0x0,  0x0,  0x0,  0x7f, 0x79, 0x72, 0x79, 0xd,  0xd,  0x0,  0x3,
     0x5,  0x2,  0x3,  0x7f, 0x7f, 0x2,  0x7e, 0x0,  0x1,  0x7e, 0x1,  0x1,
     0x7f, 0x0,  0x7f, 0x0,  0x2,  0x1,  0x1,  0x3,  0x1,  0x7f, 0x1,  0x0,
@@ -102,7 +104,7 @@ const long in_data[701] = {
     0x12, 0x17, 0x2f, 0x63, 0x78, 0x5c, 0x77, 0x6c, 0x75, 0x41, 0x49, 0x4f,
     0x3b, 0xb,  0x54, 0x37, 0};
 
-long out_data[720] = {
+REPRESENTATION out_data[720] = {
     0x3,        0xfffffffa, 0xfffffffd, 0x1d,       0x58,       0x89,
     0x87,       0x56,       0x20,       0x7,        0x7,        0x4,
     0xfffffff9, 0x0,        0x28,       0x5b,       0x6b,       0x4f,
@@ -228,8 +230,8 @@ long out_data[720] = {
  *--- Prototypes
  *--------------------------------------------------*/
 
-void fir_filter_int(const long *in, long *out, long in_len, const long *coef,
-                    long coef_len, long scale);
+void fir_filter_int(const REPRESENTATION *in, REPRESENTATION *out, long in_len,
+                    const REPRESENTATION *coef, long coef_len, long scale);
 
 /**************************************************************************
 fir_filter_int - Filters int data array based on passed int coefficients.
@@ -254,11 +256,11 @@ No return value.
 *************************************************************************/
 
 __attribute__((section(".itcmfunc"))) void
-fir_filter_int(const long *in, long *out, long in_len, const long *coef,
-               long coef_len, long scale) {
+fir_filter_int(const REPRESENTATION *in, REPRESENTATION *out, long in_len,
+               const REPRESENTATION *coef, long coef_len, long scale) {
   long i, j, coef_len2, acc_length;
   long acc;
-  const long *in_ptr, *data_ptr, *coef_start, *coef_ptr, *in_end;
+  const REPRESENTATION *in_ptr, *data_ptr, *coef_start, *coef_ptr, *in_end;
 
   /* set up for coefficients */
   coef_start = coef;
